@@ -27,8 +27,8 @@ let database = [
         id: 3,
         name: "Rias",
         age: "remaja",
-        gender: 4,
-        star: "5.00",
+        gender: "female",
+        star: 5,
         imgPath: "./img/people/cewe 3.jpg",
         description: "muka-muka orang bener",
         price: 4
@@ -199,31 +199,52 @@ for (let i = 0; i < database.length; i++) {
             modulPayment.append(buttonRed);
             
             let multiplier = database[i].price
+            let price = database[i].price;
             
             
             buttonAdd.addEventListener("click", () => {
-                cost.innerText = `$ ${database[i].price += multiplier}`
+                cost.innerText = `$ ${price += multiplier}`
                 totalHours++
                 hours.innerText = `${totalHours} jam`;
                 
             })
             buttonRed.addEventListener("click", () => {
-                cost.innerText = `$ ${database[i].price -= multiplier}`
+                cost.innerText = `$ ${price -= multiplier}`
                 totalHours --
                 hours.innerText = `${totalHours} jam`;
                 if (totalHours == 0 || totalHours < 0) {
                     totalHours = 0;
                     hours.innerText = `${totalHours} jam`;
                 }
-                if (database[i].price == 0 || database[i].price < 0) {
-                    database[i].price = 0
+                if (price == 0 || database[i].price < 0) {
+                    price = 0
                     cost.innerText = 0;
                 }
                 // console.log(totalHours)
                 // cost.innerText = Math.max(0, database[i].price);
             })
-    
-    
+            let result = "";
+            
+            let xButton = document.querySelector(".xButton");
+            xButton.addEventListener("click", () => {
+                // console.log(imagePayment);
+                modulPayment.style.display = "none";
+                imagePayment.remove();
+                cost.remove();
+                namePayment.remove();
+                delete totalHours;
+                totalHours = 1;
+                hours.remove();
+                // modulPayment.removeChild(imagePayment);
+                delete result;
+                result = "";
+                delete price;
+                price = database[i].price
+                // console.log(database[i].price)
+                // console.log(imagePayment)
+                // location.reload()
+            })
+            
             let payButton = document.querySelector(".payButton");
             payButton.addEventListener(`click`, () => {
                 // modulPayment.append(cost);
@@ -234,22 +255,12 @@ for (let i = 0; i < database.length; i++) {
                 if (database[i].gender === "male") {
                     panggilan = "Mas"
                 }
-                alert(`Terima kasih telah menggunakan jasa kami. \nKamu akan dicintai oleh ${panggilan} ${database[i].name} sesuai durasi selama ${totalHours} jam. \nTotal biaya yang telah kamu bayarkan ${cost.innerText}. \nSilahkan menunggu beberapa saat untuk mendapatkan DM dari ${panggilan} ${database[i].name}.`);
+                 result = alert(`Terima kasih telah menggunakan jasa kami. \nKamu akan dicintai oleh ${panggilan} ${database[i].name} sesuai durasi selama ${totalHours} jam. \nTotal biaya yang telah kamu bayarkan $ ${price}. \nSilahkan menunggu beberapa saat untuk mendapatkan DM dari ${panggilan} ${database[i].name}.`);
                 location.reload()
             })
             
             // console.log(imagePayment)
             // let paymentContainer = document.querySelector(".payment-container");
-            let xButton = document.querySelector(".xButton");
-            xButton.addEventListener("click", () => {
-                // console.log(imagePayment);
-                modulPayment.style.display = "none";
-                imagePayment.remove();
-                cost.remove();
-                namePayment.remove();
-                hours.remove();
-                location.reload()
-            })
         }
     })
 }
